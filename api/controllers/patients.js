@@ -362,7 +362,20 @@ exports.exportData = (req,res,next) =>{
             }else{
                 console.log(user);
                 console.log(patients);
-                // patients.push(user);
+                patients.push({"name": user.name,
+                "id": user.id,
+                "birthdate" : user.birthdate,
+                "lastName" : user.lastName,
+                "age": user.age,
+                "documentType" : user.documentType,
+                "documentNumber": user.documentNumber,
+                "civilStatus" : user.civilStatus,
+                "smoking": user.smoking,
+                "sex": user.sex,
+                "email": user.email,
+                "socioeconomic": user.socioeconomic,
+                "educationLevel": user.educationLevel,
+                "doc": user.doc});
             }    
         });
     }
