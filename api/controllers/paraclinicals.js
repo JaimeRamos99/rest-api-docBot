@@ -53,8 +53,7 @@ exports.findparaclinicalsbypandt = (req, res, next) => {
  * Exportar datos de los pacientes selecionados
  */
 exports.exportData = (req,res,next) =>{
-    const headrs = req.body;
-    const ids = headrs['ids'];
+    const ids = req.body;
     var pcs;
     console.log(ids);
     console.log(ids[0]);
