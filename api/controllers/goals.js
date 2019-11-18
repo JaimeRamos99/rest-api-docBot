@@ -125,12 +125,12 @@ exports.getprogress = (req, res, next) => {
  */
 exports.exportData = (req,res,next) =>{
     const ids = req.body;
-    var goals;
+    var goals= [];
     console.log(ids);
     console.log(ids[0]);
     console.log(ids[0].id);
     for (var i in ids){
-        Goals.findOne({'patient': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
+        Goal.findOne({'patient': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
             'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
             if(goal == null ){
 

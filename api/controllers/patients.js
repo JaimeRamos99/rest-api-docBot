@@ -380,7 +380,7 @@ exports.exportData = (req,res,next) =>{
         });
         console.log("afuera de: "+patients);
     }
-    res.json(patients);
+    res.send(patients);
 }
 
 /*

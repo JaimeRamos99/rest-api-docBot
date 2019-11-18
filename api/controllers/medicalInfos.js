@@ -122,7 +122,7 @@ exports.getWeight = (req, res, next) => {
  */
 exports.exportData = (req,res,next) =>{
     const ids = req.body;
-    var medicalsinfos;
+    var medicalsinfos= [];
     console.log(ids);
     console.log(ids[0]);
     console.log(ids[0].id);
@@ -138,5 +138,5 @@ exports.exportData = (req,res,next) =>{
             }    
         });
     }
-    res.json(medicalsinfos);
+    res.send(medicalsinfos);
 }

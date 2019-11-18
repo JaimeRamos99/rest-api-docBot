@@ -54,7 +54,7 @@ exports.findparaclinicalsbypandt = (req, res, next) => {
  */
 exports.exportData = (req,res,next) =>{
     const ids = req.body;
-    var pcs;
+    var pcs= [];
     console.log(ids);
     console.log(ids[0]);
     console.log(ids[0].id);
@@ -69,5 +69,5 @@ exports.exportData = (req,res,next) =>{
             }    
         });
     }
-    res.json(pcs);
+    res.send(pcs);
 }
