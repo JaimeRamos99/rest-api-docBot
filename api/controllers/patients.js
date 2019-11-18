@@ -351,7 +351,7 @@ exports.exportData = (req,res,next) =>{
     const headrs = req.body;
     const ids = headrs['ids'];
     var patients;
-    console.log(ids);
+    console.log(headrs);
     console.log(ids[0]);
     console.log(ids[0].id);
     for (var i in ids){
