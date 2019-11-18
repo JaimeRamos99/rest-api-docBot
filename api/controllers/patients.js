@@ -348,8 +348,8 @@ exports.putoken = (req, res, next) => {
  * Exportar datos de los pacientes selecionados
  */
 exports.exportData = (req,res,next) =>{
-    const headrs = req.body;
-    const ids = headrs['ids'];
+    const ids = req.body;
+    //const ids = headrs['ids'];
     var patients;
     console.log(headrs);
     console.log(ids[0]);
