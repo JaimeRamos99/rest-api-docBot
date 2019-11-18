@@ -360,7 +360,7 @@ exports.exportData = (req,res,next) =>{
 
             }else{
                 console.log(user);
-                patients.push({"name": user.name,
+                patients.push(json({"name": user.name,
                 "id": user.id,
                 "birthdate" : user.birthdate,
                 "lastName" : user.lastName,
@@ -373,7 +373,7 @@ exports.exportData = (req,res,next) =>{
                 "email": user.email,
                 "socioeconomic": user.socioeconomic,
                 "educationLevel": user.educationLevel,
-                "doc": user.doc});
+                "doc": user.doc}));
             } 
             console.log("Dentro de: "+patients);   
         });
