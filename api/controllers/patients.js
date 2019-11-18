@@ -362,7 +362,7 @@ exports.exportData = (req,res,next) =>{
             }else{
                 console.log(user);
                 console.log(patients);
-                patients.push(user);
+                // patients.push(user);
             }    
         });
     }
