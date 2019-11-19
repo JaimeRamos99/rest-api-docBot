@@ -135,10 +135,10 @@ exports.exportData = (req,res,next) =>{
                 //console.log(infom);
                 medicalsinfos.push(infom);
                 console.log("ddm"+medicalsinfos+"bueno ya");
-                if(ids.length == medicalsinfos.length){
+                //if(ids.length == medicalsinfos.length){
                     console.log("ddp"+medicalsinfos);
                     res.json(medicalsinfos);
-                }
+                //}
             }    
         });
     }
