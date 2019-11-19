@@ -65,10 +65,10 @@ exports.exportData = (req,res,next) =>{
             }else{
                 pc.push(pcs);
                 console.log(pcs);
-                if(i == ids.length){
-                    res.json(pcs);
-                }
-            }    
+            }   
+            if(i == ids.length){
+                res.json(pcs);
+            } 
         });
     }
     
