@@ -58,7 +58,7 @@ exports.exportData = (req,res,next) =>{
     console.log(ids);
     const tam=ids.length-1;
     for (var i in ids){
-        Paraclinical.find({'patient': ids[i].id}, ['date', 'type', 'value', 'comment'],function(err,pc){
+        Paraclinical.find({'patient': ids[i].id}, ['date', 'type', 'value', 'comment', 'patient'],function(err,pc){
             if(pc == null ){
                 console.log(err);
             }else{
