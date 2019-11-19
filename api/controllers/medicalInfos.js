@@ -132,9 +132,9 @@ exports.exportData = (req,res,next) =>{
             if(infom == null ){
 
             }else{
-                console.log(infom);
+                //console.log(infom);
                 medicalsinfos.push(infom);
-                console.log("ddm"+medicalsinfos);
+                console.log("ddm"+medicalsinfos*"bueno ya");
             }    
         });
     }
