@@ -379,8 +379,9 @@ exports.exportData = (req,res,next) =>{
             console.log("Dentro de: "+patients);   
         });
         console.log("afuera de: "+patients);
+        res.send(patients);
     }
-    res.send(patients);
+    
 }
 
 /*
