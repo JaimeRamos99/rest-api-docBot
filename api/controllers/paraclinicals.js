@@ -65,8 +65,10 @@ exports.exportData = (req,res,next) =>{
                     pacs.push(pc[j]);
                 }
                 console.log(pacs);
-            }  
+            }
+              
             if(i == tam){
+                console.log("i: "+ i);
                 res.json(pacs);
             }  
         });
