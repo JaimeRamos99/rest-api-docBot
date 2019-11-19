@@ -11,7 +11,5 @@ router.route("/buscar")
     .get(controller.findparaclinicals)
     .post(controller.findparaclinicalsbypandt);
 
-router.route("/exportData")
-    .post(controller.exportData);
 
 module.exports = router;

@@ -17,7 +17,4 @@ router.route("/putgoal")
 router.route("/delete")
     .delete(controller.delete) 
 
-router.route("/exportData")
-    .post(controller.exportData);
-
 module.exports = router;

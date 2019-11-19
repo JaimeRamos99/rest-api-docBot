@@ -120,31 +120,4 @@ exports.getprogress = (req, res, next) => {
     });
 };
 
-/**
- * Exportar datos de los pacientes selecionados
- */
-exports.exportData = (req,res,next) =>{
-    const ids = req.body;
-    var goals= [];
-    console.log(ids);
-    const tam=ids.length-1;
-    for (var i in ids){
-        Goal.find({'pat': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
-            'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
-            if(goal == null ){
-                console.log(err);
-            }else{
-                for(var j in goal){
-                    goals.push(goal[j]);
-                }
-                console.log(goals);
-            }  
-            if(i == tam){
-                console.log("i: "+ i);
-                res.json(goals);
-            }  
-        });
-    }
-  
-}
 
