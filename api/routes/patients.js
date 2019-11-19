@@ -26,9 +26,6 @@ router.route("/delete")
 router.route("/updatepat")
     .put(controller.putpat);
 
-router.route("/document")
-    .post(controller.exportFile);
-
 router.route("/exportData")
     .post(controller.exportData);
 
