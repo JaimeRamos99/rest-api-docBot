@@ -56,8 +56,7 @@ exports.exportData = (req,res,next) =>{
     const ids = req.body;
     var pcs= [];
     console.log(ids);
-    console.log(ids[0]);
-    console.log(ids[0].id);
+    const tam=ids.length-1;
     for (var i in ids){
         Paraclinical.findOne({'patient': ids[i].id}, ['date', 'type', 'value', 'comment'],function(err,pc){
             if(pc == null ){
@@ -68,7 +67,7 @@ exports.exportData = (req,res,next) =>{
                 }
                 console.log(pcs);
             }   
-            if(i == ids.length){
+            if(i == tam){
                 res.json(pcs);
             } 
         });

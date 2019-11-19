@@ -127,6 +127,7 @@ exports.exportData = (req,res,next) =>{
     const ids = req.body;
     var goals= [];
     console.log(ids);
+    const tam=ids.length-1;
     for (var i in ids){
         Goal.find({'pat': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
             'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
@@ -138,7 +139,7 @@ exports.exportData = (req,res,next) =>{
                 }
                 console.log(goals);
             }  
-            if(i == ids.length){
+            if(i == tam){
                 res.json(goals);
             }  
         });

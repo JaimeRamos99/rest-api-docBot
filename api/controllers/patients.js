@@ -351,6 +351,7 @@ exports.exportData = (req,res,next) =>{
     const ids = req.body;
     //const ids = headrs['ids'];
     console.log(ids);
+    const tam=ids.length-1;
     for (var i in ids){
         var patients= [];
         Patient.findOne({'_id': ids[i].id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
@@ -362,7 +363,7 @@ exports.exportData = (req,res,next) =>{
                 console.log(patients);
                 
             } 
-            if(ids.length == i){
+            if(tam == i){
                 console.log(" ultimo: "+patients);
                 res.json(patients);
             } 
