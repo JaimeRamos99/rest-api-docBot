@@ -134,7 +134,7 @@ exports.exportData = (req,res,next) =>{
             }else{
                 //console.log(infom);
                 medicalsinfos.push(infom);
-                console.log("ddm"+medicalsinfos*"bueno ya");
+                console.log("ddm"+medicalsinfos+"bueno ya");
             }    
         });
     }
