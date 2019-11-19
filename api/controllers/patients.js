@@ -6,7 +6,7 @@ const Goals = require("./../models/goals");
 const Paraclinical = require("./../models/paraclinicals");
 const bcrypt = require("bcrypt");
 const nodemailer = require('nodemailer');
-var Excel = require('exceljs');
+//var Excel = require('exceljs');
 
 /**
  * Muestra todos los pacientes guardados en la bd
@@ -198,7 +198,7 @@ exports.delete = (req, res, next) => {
 };
 /**
  * Exportar datos de los pacientes selecionados
- */
+ 
 exports.exportFile = (req, res, next) => {
     const headrs = req.body;
     const ids = headrs['ids'];
@@ -329,6 +329,7 @@ exports.exportFile = (req, res, next) => {
     });
     res.send(workbook.xlsx);
 };
+*/
 /**
  * Actualizar token
  */
@@ -367,7 +368,6 @@ exports.exportData = (req,res,next) =>{
             } 
         });
     }
-    
 }
 
 /*
