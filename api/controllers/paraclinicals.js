@@ -61,13 +61,13 @@ exports.exportData = (req,res,next) =>{
             if(pc == null ){
                 console.log(err);
             }else{
+                g= g + pc.length;
                 for(var j in pc){
                     pacs.push(pc[j]);
-                    g++;
                 }
                 console.log(pacs);
             }
-            if(i == tam && sw && g == pacs.length ){
+            if(i == tam && sw && 3 == pacs.length ){
                 sw=false;
                 console.log("i: "+ i);
                 res.json(pacs);
