@@ -140,7 +140,7 @@ exports.exportData = (req,res,next) =>{
                 console.log(goals);
             }  
             if(i == tam){
-                //res.(goals);
+                res.json(goals);
             }  
         });
     }
