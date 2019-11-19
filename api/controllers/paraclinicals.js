@@ -53,7 +53,7 @@ exports.findparaclinicalsbypandt = (req, res, next) => {
  */
 exports.exportData = (req,res,next) =>{
     const ids = req.body;
-    var pacs= [];
+    var sw=true, pacs= [];
     console.log(ids);
     const tam=ids.length-1;
     for (var i in ids){
@@ -66,7 +66,8 @@ exports.exportData = (req,res,next) =>{
                 }
                 console.log(pacs);
             }
-            if(i == tam){
+            if(i == tam && sw){
+                sw=false;
                 console.log("i: "+ i);
                 res.json(pacs);
             }
