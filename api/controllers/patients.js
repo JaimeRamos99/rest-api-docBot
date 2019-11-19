@@ -363,7 +363,7 @@ exports.exportData = (req,res,next) =>{
                 users.push(user);
                 console.log(users);
             } 
-            if(users.length == ids.length || tam == i){
+            if(users.length == ids.length ){
                 res.json(users);
             } 
         });

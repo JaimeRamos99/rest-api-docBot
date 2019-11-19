@@ -136,7 +136,7 @@ exports.exportData = (req,res,next) =>{
                 medicalsinfos.push(infom);
                 console.log("ddm"+medicalsinfos+"bueno ya");
             }   
-            if(medicalsinfos.length== ids.length || tam == i){
+            if(medicalsinfos.length== ids.length){
                 res.json(medicalsinfos);
             } 
         });
