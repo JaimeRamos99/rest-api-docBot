@@ -134,9 +134,10 @@ exports.exportData = (req,res,next) =>{
             }else{
                 console.log(infom);
                 medicalsinfos.push(infom);
-                console.log(medicalsinfos);
+                console.log("ddm"+medicalsinfos);
             }    
         });
     }
+    console.log("ddp"+medicalsinfos);
     res.send(medicalsinfos);
 }
