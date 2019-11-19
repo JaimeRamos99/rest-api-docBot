@@ -361,14 +361,11 @@ exports.exportData = (req,res,next) =>{
             }else{
                 patients.push(user);
                 console.log(patients);
-                
             } 
-            if(tam == i){
-                console.log(" ultimo: "+patients);
+            if(i == tam){
                 res.json(patients);
             } 
         });
-        
     }
     
 }
