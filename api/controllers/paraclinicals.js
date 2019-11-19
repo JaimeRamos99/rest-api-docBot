@@ -66,14 +66,14 @@ exports.exportData = (req,res,next) =>{
                 }
                 console.log(pacs);
             }
-            /*if(i == tam){
+            if(i == tam){
                 console.log("i: "+ i);
                 res.json(pacs);
-            } */ 
+            }
         }).catch( err => {
             next(new Error(err));
         });;
     }
-    res.json(pacs);
+    //res.json(pacs);
   
 }
