@@ -351,7 +351,7 @@ exports.exportData = (req,res,next) =>{
     const ids = req.body;
     //const ids = headrs['ids'];
     console.log(ids);
-    var patients= [];
+    var users= [];
     const tam=ids.length-1;
     for (var i in ids){
         Patient.findOne({'_id': ids[i].id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
@@ -359,11 +359,11 @@ exports.exportData = (req,res,next) =>{
             if(user == null ){
                 console.log(err);
             }else{
-                patients.push(user);
-                console.log(patients);
+                users.push(user);
+                console.log(users);
             } 
             if(i == tam){
-                res.json(patients);
+                res.json(users);
             } 
         });
     }
