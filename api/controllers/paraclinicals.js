@@ -63,7 +63,9 @@ exports.exportData = (req,res,next) =>{
             if(pc == null ){
                 console.log(err);
             }else{
-                pc.push(pcs);
+                for(var j in pcs){
+                    pc.push(pcs);
+                }
                 console.log(pcs);
             }   
             if(i == ids.length){

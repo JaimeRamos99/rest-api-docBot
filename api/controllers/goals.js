@@ -127,20 +127,20 @@ exports.exportData = (req,res,next) =>{
     const ids = req.body;
     var goals= [];
     console.log(ids);
-    console.log(ids[0]);
-    console.log(ids[0].id);
     for (var i in ids){
         Goal.find({'pat': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
             'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
             if(goal == null ){
                 console.log(err);
             }else{
-                goals.push(goal);
-                console.log(goals);
-                if(i == ids.length){
-                    res.json(goals);
+                for(var j in goal){
+                    goals.push(goal[j]);
                 }
-            }    
+                console.log(goals);
+            }  
+            if(i == ids.length){
+                res.json(goals);
+            }  
         });
     }
   
