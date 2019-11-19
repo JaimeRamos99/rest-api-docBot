@@ -1,7 +1,6 @@
 "use strict";
 
 const mongoose = require("mongoose");
-var moment = require('moment');
 const Schema = mongoose.Schema;
 
 const ParaclinicalModel = new Schema({
