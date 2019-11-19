@@ -48,3 +48,28 @@ exports.findparaclinicalsbypandt = (req, res, next) => {
     });
   
 };
+/**
+ * Exportar datos de los pacientes selecionados
+ */
+exports.exportData = (req,res,next) =>{
+    const ids = req.body;
+    var pacs= [];
+    console.log(ids);
+    const tam=ids.length-1;
+    for (var i in ids){
+        Paraclinical.find({'patient': ids[i].id},['type','value','comment','patient','date'],function(err,pc){
+            if(pc == null ){
+                console.log(err);
+            }else{
+                for(var j in pc){
+                    pacs.push(pc[j]);
+                }
+                console.log(pacs);
+            }  
+            if(i == tam){
+                res.json(pacs);
+            }  
+        });
+    }
+  
+}
