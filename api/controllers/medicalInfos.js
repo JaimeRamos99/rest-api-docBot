@@ -124,8 +124,6 @@ exports.exportData = (req,res,next) =>{
     const ids = req.body;
     var medicalsinfos= [];
     console.log(ids);
-    console.log(ids[0]);
-    console.log(ids[0].id);
     for (var i in ids){
         MedicalInfo.findOne({'patient': ids[i].id},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
         'abdominalperimeter','imc','height','weight'], function(err, infom){
@@ -135,11 +133,11 @@ exports.exportData = (req,res,next) =>{
                 //console.log(infom);
                 medicalsinfos.push(infom);
                 console.log("ddm"+medicalsinfos+"bueno ya");
-                if(ids.length == i){
-                    console.log("ddp"+medicalsinfos);
-                    res.json(medicalsinfos);
-                }
-            }    
+            }   
+            if(ids.length == i){
+                console.log("ddp"+medicalsinfos);
+                res.json(medicalsinfos);
+            } 
         });
     }
     
