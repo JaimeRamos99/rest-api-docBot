@@ -73,6 +73,7 @@ exports.exportData = (req,res,next) =>{
         }).catch( err => {
             next(new Error(err));
         });;
+        console.log("iff: "+ i);
     }
     //res.json(pacs);
   
