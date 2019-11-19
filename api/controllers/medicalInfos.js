@@ -139,5 +139,5 @@ exports.exportData = (req,res,next) =>{
         });
     }
     console.log("ddp"+medicalsinfos);
-    res.send(medicalsinfos);
+    res.json(medicalsinfos);
 }
