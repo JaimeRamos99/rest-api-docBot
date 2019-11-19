@@ -66,7 +66,6 @@ exports.exportData = (req,res,next) =>{
                 }
                 console.log(pacs);
             }
-              
             if(i == tam){
                 console.log("i: "+ i);
                 res.json(pacs);
