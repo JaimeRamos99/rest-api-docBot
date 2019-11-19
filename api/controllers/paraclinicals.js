@@ -63,7 +63,7 @@ exports.exportData = (req,res,next) =>{
                 console.log(err);
             }else{
                 for(var j in pcs){
-                    pc.push(pcs);
+                    pcs.push(pc[j]);
                 }
                 console.log(pcs);
             }   
