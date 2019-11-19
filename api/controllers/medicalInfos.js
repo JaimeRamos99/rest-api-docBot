@@ -129,12 +129,12 @@ exports.exportData = (req,res,next) =>{
     for (var i in ids){
         MedicalInfo.findOne({'patient': ids[i].id},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
         'abdominalperimeter','imc','height','weight'], function(err, infom){
-            if(user == null ){
+            if(infom == null ){
 
             }else{
                 console.log(infom);
-                console.log(medicalsinfos);
                 medicalsinfos.push(infom);
+                console.log(medicalsinfos);
             }    
         });
     }
