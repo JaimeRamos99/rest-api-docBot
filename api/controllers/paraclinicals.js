@@ -2,7 +2,6 @@
 
 const Paraclinical = require("./../models/paraclinicals");
 const Patient = require("./../models/patients");
-var excel = require('excel4node');
 //Muestra todos los paraclinicos guardados en la bd
 exports.all = (req, res, next) => {
     Paraclinical.find()
