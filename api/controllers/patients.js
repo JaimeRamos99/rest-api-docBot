@@ -358,28 +358,17 @@ exports.exportData = (req,res,next) =>{
         Patient.findOne({'_id': ids[i].id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
         'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
             if(user == null ){
-
+                console.log(err);
             }else{
-                console.log(user);
-                patients.push({"name": user.name,
-                "id": user.id,
-                "birthdate" : user.birthdate,
-                "lastName" : user.lastName,
-                "age": user.age,
-                "documentType" : user.documentType,
-                "documentNumber": user.documentNumber,
-                "civilStatus" : user.civilStatus,
-                "smoking": user.smoking,
-                "sex": user.sex,
-                "email": user.email,
-                "socioeconomic": user.socioeconomic,
-                "educationLevel": user.educationLevel,
-                "doc": user.doc});
-            } 
-            console.log("Dentro de: "+patients);   
+                patients.push(user);
+                console.log(patients);
+                if(ids.length == i){
+                    console.log("afuera de: "+patients);
+                    res.json(patients);
+                }
+            }  
         });
-        console.log("afuera de: "+patients);
-        res.send(patients);
+        
     }
     
 }

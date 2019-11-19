@@ -130,17 +130,19 @@ exports.exportData = (req,res,next) =>{
     console.log(ids[0]);
     console.log(ids[0].id);
     for (var i in ids){
-        Goal.findOne({'patient': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
+        Goal.find({'pat': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
             'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
             if(goal == null ){
-
+                console.log(err);
             }else{
-                console.log(goal);
-                console.log(goals);
                 goals.push(goal);
+                console.log(goals);
+                if(i == ids.length){
+                    res.json(goals);
+                }
             }    
         });
     }
-    res.json(goals);
+  
 }
 

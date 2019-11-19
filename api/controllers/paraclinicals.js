@@ -61,13 +61,15 @@ exports.exportData = (req,res,next) =>{
     for (var i in ids){
         Paraclinical.findOne({'patient': ids[i].id}, ['date', 'type', 'value', 'comment'],function(err,pc){
             if(pc == null ){
-
+                console.log(err);
             }else{
-                console.log(pc);
-                console.log(pcs);
                 pc.push(pcs);
+                console.log(pcs);
+                if(i == ids.length){
+                    res.json(pcs);
+                }
             }    
         });
     }
-    res.send(pcs);
+    
 }

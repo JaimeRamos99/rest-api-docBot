@@ -130,15 +130,15 @@ exports.exportData = (req,res,next) =>{
         MedicalInfo.findOne({'patient': ids[i].id},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
         'abdominalperimeter','imc','height','weight'], function(err, infom){
             if(infom == null ){
-
+                console.log(err);
             }else{
                 //console.log(infom);
                 medicalsinfos.push(infom);
                 console.log("ddm"+medicalsinfos+"bueno ya");
-                //if(ids.length == medicalsinfos.length){
+                if(ids.length == i){
                     console.log("ddp"+medicalsinfos);
                     res.json(medicalsinfos);
-                //}
+                }
             }    
         });
     }
