@@ -142,6 +142,11 @@ exports.putpat = (req, res, next) => {
             console.log("Error: "+err);
         }
     });
+    MedicalInfo.updateOne({'patient':id},{'height':updates["height"]}, function(err, med){
+        if(err){
+            console.log("Error: "+err);
+        }
+    });
     res.json({"update": "OK"});
 };
 /**
@@ -161,7 +166,7 @@ exports.sendEmail = (req) => {
         from: 'docbotadmon@gmail.com', // sender address
         to: patient["email"], // list of receivers
         subject: 'BIENVENIDO A DOCBOT', // Subject line
-        html: '<h2>Bienvenido a DocBot!</h2><p>'+patient["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario: </b>'+patient["documentNumber"]+'<br/><b>Contraseña: </b>'+patient["password"]+'<br/><br/>Cordialmente, <br/> <img src="https://raw.githubusercontent.com/rjuliao/Botic-Web/master/src/assets/logos/name-logo.jpeg?token=AK6NGAVIH5DHJMUJ4634W7C5ZRF2A" width="200" height="130"><br/> <i>"Sistema de acompañamiento para pacientes con<i><br/><i>Diabetes tipo 2 y síndrome metabólico"<i><br/><strong>Universidad del norte - 2019</strong></p>'// plain text body
+        html: '<h2>Bienvenido a DocBot!</h2><p>'+patient["name"]+', su cuenta ha sido creada exitosamente<br/><br/><b>Nombre de usuario: </b>'+patient["documentNumber"]+'<br/><b>Contraseña: </b>'+patient["password"]+'<br/><br/><br/>Cordialmente, <br/> <img src="https://raw.githubusercontent.com/CCode02/DocBot-Movil/master/assets/logo.png" width="200" height="250"><br/> <i>"Sistema de acompañamiento para pacientes con<i><br/><i>Diabetes tipo 2 y síndrome metabólico"<i><br/><strong>Universidad del norte - 2019</strong></p>'// plain text body
     };
     console.log(patient["email"]);
     transporter.sendMail(mailOptions, function (err, info) {
@@ -196,140 +201,7 @@ exports.delete = (req, res, next) => {
         res.json({"delete":"ok"});
     });
 };
-/**
- * Exportar datos de los pacientes selecionados
- 
-exports.exportFile = (req, res, next) => {
-    const headrs = req.body;
-    const ids = headrs['ids'];
-    console.log(ids);
-    console.log(ids[0]);
-    console.log(ids[0].id);
-    // A new Excel Work Book
-    var workbook = new Excel.Workbook();
-    // Some information about the Excel Work Book.
-    workbook.creator = 'DocBot';
-    //workbook.lastModifiedBy = '';
-    //workbook.created = new Date(2018, 6, 19);
-    //workbook.modified = new Date();
-    //workbook.lastPrinted = new Date(2016, 9, 27);
-    // Create a sheet
-    var sheet1 = workbook.addWorksheet('Info_Personal_Pacientes');
-    var sheet2 = workbook.addWorksheet('Info_Medica_Pacientes');
-    var sheet3 = workbook.addWorksheet('Pesos_Pacientes');
-    var sheet4 = workbook.addWorksheet('Metas_Pacientes');
-    var sheet5 = workbook.addWorksheet('Paraclinicos_Pacientes');
-    // A table header
-    sheet1.columns = [
-        { header: 'Id', key: 'id' },
-        { header: 'Nombre completo', key: 'fullname' },
-        { header: 'Fecha de nacimiento', key: 'birthdate' },
-        { header: 'Edad', key: 'age' },
-        { header: 'Tipo de documento', key: 'documentType' },
-        { header: 'Número de documento', key: 'documentNumber' },
-        { header: 'sexo', key: 'sex' },
-        { header: 'correo', key: 'email' },
-        { header: 'Estado civil', key: 'statusc' },
-        { header: 'Estrato socioeconómico', key: 'socioeconomic' },
-        { header: 'Nivel Educativo', key: 'educaLevel' },
-        { header: 'Tabaquismo', key: 'smoking' },
-        { header: 'Id_doctor', key: 'doc' }
-    ]
-    // A table header info medica
-    sheet2.columns = [
-        { header: 'Id_Paciente', key: 'idPat' },
-        { header: 'Contexto clinico', key: 'clinicalContext' },
-        { header: 'Test Findrisc', key: 'testFindRisk' },
-        { header: 'Centro médico', key: 'medicalCenter' },
-        { header: 'Es diabetico?', key: 'isDiabetic' },
-        { header: 'Perímetro abdominal', key: 'abdominalperimeter' },
-        { header: 'IMC', key: 'imc' },
-        { header: 'Altura', key: 'height' }
-    ]
-    // A table header pesos
-    sheet3.columns = [
-        { header: 'IdPaciente', key: 'idP' },
-        { header: 'Valor', key: 'value' },
-        { header: 'Fecha', key: 'date' }
-    ]
-    // A table header metas
-    sheet4.columns = [
-        { header: 'IdPaciente', key: 'idP' },
-        { header: 'Fecha de inicio', key: 'creationDate' },
-        { header: 'Fecha de vencimiento', key: 'dueDate' },
-        { header: 'Fecha de cumplimiento', key: 'complianceDate' },
-        { header: 'Descripción', key: 'description' },
-        { header: 'Cantidad', key: 'quantity' },
-        { header: 'Medida', key: 'quantityType' },
-        { header: 'Frecuencia', key: 'frequency' },
-        { header: 'Estado', key: 'state' },
-        { header: 'Progreso', key: 'progress' },
-        { header: 'Número_Mensajes', key: 'nMessages' }
-    ]
-    // A table header paraclinicos
-    sheet5.columns = [
-        { header: 'IdPaciente', key: 'idP' },
-        { header: 'Fecha', key: 'date' },
-        { header: 'Tipo', key: 'type' },
-        { header: 'Valor', key: 'value' },
-        { header: 'Comentario', key: 'comment' }
-    ]
-    for (var i in ids){
-        Patient.findOne({'_id': ids[i].id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
-        'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
-            if(user == null ){
 
-            }else{
-                sheet1.addRow({id: user.id, fullname: user.name +' '+user.lastName, birthdate: user.birthdate, age: user.age,
-                documentType: user.documentType, documentNumber: user.documentNumber, sex: user.sex, email:user.email,
-                doc: user.doc, statusc: user.civilStatus, socioeconomic: user.socioeconomic,educaLevel: user.educationLevel,
-                smoking: user.smoking });   
-            }
-                
-        });
-        MedicalInfo.findOne({'patient': ids[i].id},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
-        'abdominalperimeter','imc','height','weight'], function(err, infom){
-            
-            if(infom== null){
-                
-            }else{
-                sheet2.addRow({idPat: infom.patient, clinicalContext: infom.clinicalContext , testFindRisk: infom.testFindRisk,
-                    medicalCenter: infom.medicalCenter, isDiabetic:infom.isDiabetic , abdominalperimeter: infom.abdominalperimeter,
-                    imc: infom.imc, height: infom.height});
-                const pesos = infom.weight;
-                for(var j=0; j < pesos.length; j++){
-                    sheet3.addRow({id: user.id, value: pesos[i].value, date: pesos[j].date,});
-                } 
-            }
-            
-        });
-        Goals.findOne({'patient': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
-            'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
-            if(goal == null){
-
-            }else{
-                sheet4.addRow({idP: ids[i].id, creationDate: goal.creationDate, dueDate: goal.dueDate, complianceDate: goal.complianceDate,
-                description: goal.description, quantity: goal.quantity, quantityType: '', frequency: goal.frequency, state:goal.state,
-                progress: goal.progress, nMessages: goal.nMessages }); 
-            }
-        });
-        Paraclinical.findOne({'patient': ids[i].id}, ['date', 'type', 'value', 'comment'],function(err,pc){
-            if(pc == null){
-
-            }else{
-                    sheet5.addRow({idP: ids[i].id, date: pc.date, type: pc.type, value: pc.value, comment: pc.comment});
-            }
-        });
-    }
-    // Save Excel on Hard Disk
-    workbook.xlsx.writeFile("Datos_Pacientes.xlsx")
-    .then(function() {
-        // Success Message
-        alert("File Saved");
-    });
-    res.send(workbook.xlsx);
-};
-*/
 /**
  * Actualizar token
  */
