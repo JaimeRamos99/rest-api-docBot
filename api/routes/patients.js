@@ -15,7 +15,8 @@ router.route("/buscarPaciente")
     .get(controller.findpatient);
 
 router.route("/login")
-    .post(controller.login);
+    .post(controller.login)
+    .get(controller.findpatientbyid);
     
 router.route("/sendemail")
     .get(controller.sendEmail);

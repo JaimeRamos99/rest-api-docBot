@@ -118,6 +118,35 @@ exports.getWeight = (req, res, next) => {
     });
 };
 /**
+ * Actualizar datos del paciente
+ */
+exports.putap = (req, res, next) => {
+    const updates = req.body;
+    const id = updates["id"];
+    console.log(updates);
+    MedicalInfo.updateOne({ 'patient': id }, {$push:{'abdominalperimeter':{'value': updates["abdominalperimeter"],'date':updates["date"] }}}, function (err, patient) {
+        if(err){
+            console.log(err);
+        }
+        console.log(patient)
+    });
+    res.json({"update": "OK"});
+};
+/**
+ * Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
+ */
+exports.getap = (req, res, next) => { 
+    const user2 = req.headers;
+    const id= user2["id"];
+    MedicalInfo.findOne({ 'patient': id },['abdominalperimeter'],function (err, user) {
+        if(user==null){
+            res.json({"weight":"no asociado a paciente"});
+        }else{
+            res.json({"weight":user.abdominalperimeter});
+        }
+    });
+};
+/**
  * Exportar datos de los pacientes selecionados
  */
 exports.exportData = (req,res,next) =>{

@@ -4,7 +4,7 @@ const Patient = require("./../models/patients");
 const MedicalInfo = require("./../models/medicalInfos");
 const Goals = require("./../models/goals");
 const Paraclinical = require("./../models/paraclinicals");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const nodemailer = require('nodemailer');
 //var Excel = require('exceljs');
 
@@ -75,6 +75,40 @@ exports.findpatients = (req, res, next) => {
   
 };
 /**
+ * Buscar pacientes segun id 
+ */
+exports.findpatientbyid= (req, res, next) => {
+    const patient= req.headers;
+    const dn= patient['id'];
+    console.log(dn);
+    Patient.findOne({'_id':dn},['name','lastName','age','weight','height','medicalCenter','password',
+    'avatar', 'sex', 'email', 'steps'], function(err, user){
+        console.log(user);
+        if(user == null){
+            res.json({"Patient": "not found"})
+            console.log(err);
+        }else{
+            MedicalInfo.findOne({'patient': user.id},['weight', 'height', 'abdominalperimeter'],function(err, med){
+                res.json({                
+                "id": user.id,
+                "name" : user.name,
+                "lastName" : user.lastName,
+                "age": user.age,
+                "medicalCenter" : user.medicalCenter,
+                "weight": med.weight,
+                "height" : med.height,
+                "abdominalperimeter": med.abdominalperimeter,
+                "avatar": user.avatar,
+                "sex": user.sex,
+                "email": user.email,
+                "steps": user.steps
+                });
+            });
+        }
+    });
+};
+
+/**
  * Login pacientes
  */
 exports.login = (req, res, next) => { 
@@ -82,28 +116,17 @@ exports.login = (req, res, next) => {
     const user2 = req.body;
     const email = user2["documentNumber"];
     const password = user2["password"];
-    Patient.findOne({ 'documentNumber': email }, ['name','lastName','age','weight','height','medicalCenter','password',
-     'avatar', 'sex', 'email', 'steps'] , function (err, user) {
+    Patient.findOne({ 'documentNumber': email }, [] , function (err, user) {
         if(user==null){
             res.json({"login": false});
         }else{
             bcrypt.compare(password, user.password, function(err, resu) {
                 if(resu==true){
-                    MedicalInfo.findOne({'patient': user.id},['weight', 'height'],function(err, med){
-                        res.json({"login" : true,
-                        "id": user.id,
-                        "name" : user.name,
-                        "lastName" : user.lastName,
-                        "age": user.age,
-                        "medicalCenter" : user.medicalCenter,
-                        "weight": med.weight,
-                        "height" : med.height,
-                        "avatar": user.avatar,
-                        "sex": user.sex,
-                        "email": user.email,
-                        "steps": user.steps
-                        });
+                    res.json({
+                        "login" : true,
+                        "id": user.id
                     });
+                
                 }else{
                     res.json({"login" : false})
                 }

@@ -9,7 +9,10 @@ const MedicalInfoModel = new Schema({
     medicalCenter: String,
     eps: String,
     isDiabetic: Boolean,
-    abdominalperimeter: Number,
+    abdominalperimeter: [{ 
+        value: Number, 
+        date: String
+    }],
     weight: [{ 
         value: Number, 
         date: String
