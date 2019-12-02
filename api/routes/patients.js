@@ -32,5 +32,7 @@ router.route("/exportData")
 
 router.route("/token")
     .put(controller.putoken);
-    
+
+router.route("/logged")
+    .put(controller.putlogged);
 module.exports = router;

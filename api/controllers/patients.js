@@ -112,7 +112,6 @@ exports.findpatientbyid= (req, res, next) => {
  * Login pacientes
  */
 exports.login = (req, res, next) => { 
-
     const user2 = req.body;
     const email = user2["documentNumber"];
     const password = user2["password"];
@@ -239,7 +238,20 @@ exports.putoken = (req, res, next) => {
     });
     res.json({"update": "ok"});
 };
-
+/**
+ * Actualizar logged
+ */
+exports.putlogged = (req, res, next) => {
+    const update = req.body;
+    const aidi = update["id"];
+    console.log(update);
+    Patient.updateOne({'_id': aidi}, {'logged': update["logged"]}, function(err, user){
+        if(err){
+            console.log("Error: "+err);
+        }
+    });
+    res.json({"update": "ok"});
+};
 /**
  * Exportar datos de los pacientes selecionados
  */
