@@ -59,7 +59,7 @@ exports.post = (req, res, next) => {
         // and to compress them (notifications with similar content will get
         // compressed).
         let chunk = expo.chunkPushNotifications(messages);
-        let tickets;
+        let tickets= [];
         (async () => {
         // Send the chunks to the Expo push notification service. There are
         // different strategies you could use. A simple one is to send one chunk at a
