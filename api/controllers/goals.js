@@ -2,6 +2,7 @@
 
 const Goal = require("./../models/goals");
 const Patient = require("./../models/patients");
+const { Expo } = require('expo-server-sdk');
 /**
  * Muestra todos las metas guardados en la bd
  */
