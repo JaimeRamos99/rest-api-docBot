@@ -22,7 +22,7 @@ exports.post = (req, res, next) => {
     new Goal(goal).save(err=>{
        console.log(err);
     });
-    Patient.findOne({ '_id': goal["patient"] }, ['token', 'logged'] , function (err, user){
+    Patient.findOne({ '_id': goal["pat"] }, ['token', 'logged'] , function (err, user){
         console.log(user);
         if(user==null){
             console.log(err);
