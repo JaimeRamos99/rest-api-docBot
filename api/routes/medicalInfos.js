@@ -20,6 +20,12 @@ router.route("/updateweight")
 router.route("/getweight")
     .get(controller.getWeight);
 
+router.route("/updateap")
+    .put(controller.putap);
+
+router.route("/getap")
+    .get(controller.getap);
+
 router.route("/exportData")
     .post(controller.exportData);
 
