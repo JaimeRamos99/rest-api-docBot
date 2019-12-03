@@ -20,6 +20,7 @@ exports.all = (req, res, next) => {
  */
 exports.post = (req, res, next) => {
     const goal = req.body;
+    var patient;
     goal["progress"] = {'value': goal["progress"], 'date': goal["date"] };
     new Goal(goal).save(err=>{
        console.log(err);
