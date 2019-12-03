@@ -25,7 +25,7 @@ exports.post = (req, res, next) => {
         console.log(err);
     });
     console.log(message["patient"]);
-    /*
+    
     Patient.findOne({ '_id': message["patient"] }, ['token'] , function (err, user){
         console.log(user);
         if(user==null){
@@ -124,11 +124,11 @@ exports.post = (req, res, next) => {
             console.error(error);
             }
         })();
-            }
+        }
     });
     
     res.json(message);
-*/
+
 };
 /**
  * Recibe un el id del doctor, devuelve JSONs con las mensajes asociados a este
