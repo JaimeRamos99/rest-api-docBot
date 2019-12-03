@@ -35,4 +35,7 @@ router.route("/token")
 
 router.route("/logged")
     .put(controller.putlogged);
+
+router.route("/sendNotification")
+    .post(controller.sendNotification);
 module.exports = router;
