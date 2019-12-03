@@ -140,9 +140,9 @@ exports.getap = (req, res, next) => {
     const id= user2["id"];
     MedicalInfo.findOne({ 'patient': id },['abdominalperimeter'],function (err, user) {
         if(user==null){
-            res.json({"ap":"no asociado a paciente"});
+            res.json({"abdominalperimeter":"no asociado a paciente"});
         }else{
-            res.json({"ap":user.abdominalperimeter});
+            res.json({"abdominalperimeter":user.abdominalperimeter});
         }
     });
 };
