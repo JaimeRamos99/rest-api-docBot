@@ -50,8 +50,8 @@ exports.post = (req, res, next) => {
             messages.push({
                 to: pushToken,
                 sound: 'default',
-                body: 'Tiene un nuevo mensaje de su médico!',
-                title: 'SAPO',
+                body: message["subject"],
+                title: 'Tiene un nuevo mensaje de su médico!',
                 data: { withSome: 'data' },
             });
             
