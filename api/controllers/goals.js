@@ -1,6 +1,7 @@
 "use strict";
 
 const Goal = require("./../models/goals");
+const Patient = require("./../models/patients");
 /**
  * Muestra todos las metas guardados en la bd
  */
