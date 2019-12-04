@@ -19,6 +19,7 @@ exports.all = (req, res, next) => {
 exports.post = (req, res, next) => {
     const medicalInfo = req.body;
     medicalInfo["weight"] = {'value': medicalInfo["weight"], 'date': medicalInfo["date"] };
+    medicalInfo["abdominalperimeter"] = {'value': medicalInfo["abdominalperimeter"], 'date': medicalInfo["date"] };
     console.log(medicalInfo);
     new MedicalInfo(medicalInfo).save(err=>{
        console.log(err);
