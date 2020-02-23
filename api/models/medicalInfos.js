@@ -5,22 +5,23 @@ const Schema = mongoose.Schema;
 
 const MedicalInfoModel = new Schema({
     clinicalContext: String,
-    testFindRisk:String,
+    testFindRisk: String,
     medicalCenter: String,
     eps: String,
     isDiabetic: Boolean,
-    abdominalperimeter: [{ 
-        value: Number, 
+    fumador: Boolean,
+    abdominalperimeter: [{
+        value: Number,
         date: String
     }],
-    weight: [{ 
-        value: Number, 
+    weight: [{
+        value: Number,
         date: String
     }],
     height: String,
     imc: String,
     patient: {
-        type: mongoose.Schema.Types.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Patient'
     }
 });
