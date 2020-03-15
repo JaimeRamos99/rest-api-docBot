@@ -14,7 +14,7 @@ const nodemailer = require('nodemailer');
 exports.all = (req, res, next) => {
     Patient.find()
         .then(patients => {
-            res.json(patients);
+            res.json(patients); 
         })
         .catch(err => {
             next(new Error(err));
@@ -205,26 +205,27 @@ exports.sendEmail = (req) => {
 /**
  * Delete patient- Preguntar si debo borrar las metas
  */
-exports.delete = (req, res, next) => {
+exports.delete = async function (req, res, next) {
     const patient = req.headers;
     const id = patient["id"];
     console.log(patient);
     console.log(id);
-    MedicalInfo.deleteMany({ 'patient': id }, function (err) {
+    await MedicalInfo.deleteMany({ 'patient': id }, function (err) {
         if (err) {
             console.log(err)
         }
     });
-    Paraclinical.deleteMany({ 'patient': id }, function (err) {
+    await Paraclinical.deleteMany({ 'patient': id }, function (err) {
         if (err) {
             console.log(err)
         }
     });
-    Patient.deleteOne({ '_id': id }, function (err) {
+    await Patient.deleteOne({ '_id': id }, function (err) {
         if (err) {
             console.log(err)
+        } else {
+            res.json({ "delete": "ok" });
         }
-        res.json({ "delete": "ok" });
     });
 };
 /**
