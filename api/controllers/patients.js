@@ -208,9 +208,8 @@ exports.sendEmail = (req) => {
 exports.delete = async function (req, res, next) {
     const patient = req.headers;
     const id = patient["id"];
-    console.log(patient);
     console.log(id);
-    await MedicalInfo.deleteMany({ 'patient': id }, function (err) {
+    /*await MedicalInfo.deleteMany({ 'patient': id }, function (err) {
         if (err) {
             console.log(err)
         }
@@ -226,7 +225,7 @@ exports.delete = async function (req, res, next) {
         } else {
             res.json({ "delete": "ok" });
         }
-    });
+    });*/
 };
 /**
  * Actualizar token
